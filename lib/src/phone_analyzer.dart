@@ -64,17 +64,22 @@ class PhoneAnalyzer {
         final rest = stripped.substring(len);
         final cd = countryByCode[candidate];
         if (cd != null) {
-          final valid = cd.possibleLengths.contains(rest.length);
+          final bool lengthOk = cd.possibleLengths.contains(rest.length);
           final String prefix = cd.nationalPrefixes
               .firstWhere((np) => rest.startsWith(np), orElse: () => '');
+          final bool prefixOk =
+              cd.nationalPrefixes.isEmpty || prefix.isNotEmpty;
+          final bool isValid = lengthOk && prefixOk;
           return PhoneAnalysisResult(
             raw: raw,
             normalized: normalized,
             country: cd.name,
             countryCode: cd.countryCode,
             nationalPrefix: prefix.isEmpty ? null : prefix,
-            isValid: valid,
-            reason: valid ? 'ok' : 'length_mismatch',
+            isValid: isValid,
+            reason: isValid
+                ? 'ok'
+                : (!lengthOk ? 'length_mismatch' : 'invalid_prefix'),
           );
         }
       }
