@@ -5,7 +5,11 @@
  */
 
 String normalize(String phone) {
-  return phone.replaceAll(RegExp('[^0-9+]'), '');
+  final cleaned = phone.replaceAll(RegExp('[^0-9+]'), '');
+  if (cleaned.startsWith('00')) {
+    return '+${cleaned.substring(2)}';
+  }
+  return cleaned;
 }
 
 String stripPlus(String phone) {
