@@ -1,0 +1,16 @@
+name: bnb_phone_identifier
+description: A Dart library to detect, validate and analyze phone numbers by country code, prefix and pattern.
+version: 1.0.0
+homepage: https://github.com/farouk-cauridor/bnb_phone_identifier.git
+
+environment:
+  sdk: '>=2.18.0 <4.0.0'
+
+dependencies:
+  libphonenumber_plugin: ^0.3.3
+
+dev_dependencies:
+  lint: ^2.8.0
+  test: ^1.26.3
+
+publish_to: 'none' # remove when publishing
